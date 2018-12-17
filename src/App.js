@@ -1,27 +1,48 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { getUser } from './api';
+import { Table } from 'antd';
+
+const dataSource = [{
+  key: '1',
+  name: '胡彦斌',
+  age: 32,
+  address: '西湖区湖底公园1号'
+}, {
+  key: '2',
+  name: '胡彦祖',
+  age: 42,
+  address: '西湖区湖底公园1号'
+}];
+
+const columns = [{
+  title: '姓名',
+  dataIndex: 'name',
+  key: 'name',
+}, {
+  title: '年龄',
+  dataIndex: 'age',
+  key: 'age',
+}, {
+  title: '住址',
+  dataIndex: 'address',
+  key: 'address',
+}];
+
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <Table dataSource={dataSource} columns={columns}></Table>
       </div>
     );
+  }
+
+  componentDidMount() {
+    getUser().then(res => {
+      console.log(res);
+    });
   }
 }
 
